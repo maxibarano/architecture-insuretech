@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-app
+    spec:
+      containers:
+        - image: shestera/scaletestapp
+          name: test-app
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "10Mi"
+            limits:
+              memory: "25Mi"
+      restartPolicy: Always
